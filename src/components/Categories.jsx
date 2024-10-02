@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { DELETE_CATEGORIE, SET_CATEGORIE } from "../redux/actionType";
 
 const Categories = () => {
   const categories = useSelector((state) => state.categories);
@@ -9,7 +10,7 @@ const Categories = () => {
   const HandleAdd = () => {
     const newCategorie = categorieNew.current.value;
     dispatch({
-      type: "set_categorie",
+      type: SET_CATEGORIE,
       payload: {
         id: crypto.randomUUID(),
         category: newCategorie,
@@ -19,7 +20,7 @@ const Categories = () => {
   const clearSearch = () => {};
   const handleDelete = (id) => {
     console.log(id);
-    dispatch({ type: "delete_categorie", payload: id });
+    dispatch({ type: DELETE_CATEGORIE, payload: id });
   };
   return (
     <div className="container m-auto p-4">
@@ -34,20 +35,12 @@ const Categories = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-2">
         <div className="">
           <div className="flex">
-            <input
-              type="text"
-              placeholder="Catégorie"
-              className="border p-2"
-            />
+            <input type="text" placeholder="Catégorie" className="border p-2" />
             <span>
-              <button
-                className="p-2 bg-green-900 ml-5 text-white min-w-[100px] rounded-md"
-              >
+              <button className="p-2 bg-green-900 ml-5 text-white min-w-[100px] rounded-md">
                 Rechercher
               </button>
-              <button
-                className="p-2 bg-green-900 ml-5 text-white min-w-[100px] rounded-md"
-              >
+              <button className="p-2 bg-green-900 ml-5 text-white min-w-[100px] rounded-md">
                 Annuler
               </button>
             </span>
